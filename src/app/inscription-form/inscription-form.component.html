@@ -1,0 +1,81 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <label for="firstname">firstname</label>
+    <input type="text" id="firstname" formControlName="firstname" />
+    <span *ngIf="signUpForm.controls.firstname.errors?.['required']">
+        Le champ firstname doit être renseigné
+    </span>
+    <span *ngIf="signUpForm.controls.firstname.errors?.['minLength']">
+        Le champ firstname doit avoir au moins 2 caractères
+    </span>
+  </fieldset>
+
+  <fieldset>
+    <label for="lastname">lastname</label>
+    <input type="text" id="lastname" formControlName="lastname" />
+    <span *ngIf="signUpForm.controls.lastname.errors?.['required']">
+        Le champ lastname doit être renseigné
+    </span>
+    <span *ngIf="signUpForm.controls.lastname.errors?.['minLength']">
+        Le champ lastname doit avoir au moins 2 caractères
+    </span>
+  </fieldset>
+
+  <fieldset>
+    <label for="email">email</label>
+    <input type="email" id="email" formControlName="email" />
+
+    <div *ngIf="signUpForm.controls.email.errors">
+        <span *ngIf="signUpForm.controls.email.errors?.['required']">
+        Le champ email doit être renseigné
+        </span>
+        <span *ngIf="signUpForm.controls.email.errors?.['email']">
+        L'email saisi n'est pas au bon format
+        </span>
+    </div>
+  </fieldset>
+
+  <div formGroupName="addressForm">
+    <fieldset>
+      <label for="street">street</label>
+      <input type="text" id="street" formControlName="street" />
+      <span *ngIf="signUpForm.controls.addressForm.get('street')?.errors?.['required']">
+        Le champ est est requis
+      </span>
+    </fieldset>
+    <fieldset>
+      <label for="zipCode">zipCode</label>
+      <input type="text" id="zipCode" formControlName="zipCode" />
+      <span *ngIf="signUpForm.controls.addressForm.get('zipCode')?.errors?.['required']">
+        Le champ est est requis
+      </span>
+    </fieldset>
+
+    <fieldset>
+      <label for="city">City</label>
+      <input type="text" id="city" formControlName="city" />
+      <span *ngIf="signUpForm.controls.addressForm.get('city')?.errors?.['required']">
+        Le champ est est requis
+      </span>
+    </fieldset>
+  </div>
+  <div formGroupName="passwords">
+    <fieldset>
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password"/>
+      <div>
+        <span *ngIf="signUpForm.controls.passwords.get('password')?.errors?.['required']">
+          Le champ est est requis
+        </span>
+      </div>
+    </fieldset>
+    <fieldset>
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword"/>
+      <span *ngIf="signUpForm.controls.passwords.get('confirmPassword')?.errors?.['required']">
+        Le champ est est requis
+      </span>
+    </fieldset>
+  </div>
+  <button type="submit">Submit</button>
+</form>
